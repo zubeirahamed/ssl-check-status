@@ -1,0 +1,25 @@
+name: SSL Expiry Check
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run every day at midnight
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  ssl_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up environment
+        run: |
+          echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}" >> $GITHUB_ENV
+
+      - name: Copy domains file
+        run: cp .github/scripts/domains.txt $GITHUB_WORKSPACE/.github/scripts/
+
+      - name: Run SSL check script
+        run: |
+          bash .github/scripts/ssl-check.sh
