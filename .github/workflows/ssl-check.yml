@@ -18,7 +18,7 @@ jobs:
           echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}" >> $GITHUB_ENV
 
       - name: Copy domains file
-        run: cp .github/scripts/domains.txt $GITHUB_WORKSPACE/.github/scripts/
+        run: cp domains.txt .github/scripts/
 
       - name: Run SSL check script
         run: |
