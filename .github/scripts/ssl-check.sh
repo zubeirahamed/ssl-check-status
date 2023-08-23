@@ -11,7 +11,6 @@ for domain in "${DOMAINS[@]}"; do
   current_epoch=$(date +%s)
   days_remaining=$(( (expiry_epoch - current_epoch) / 86400 ))
 
-  if [[ $days_remaining -lt 30 ]]; then
     message="⚠ SSL Expiry Alert\n   * Domain : ${domain}\n   * Warning : The SSL certificate for ${domain} will expire in ${days_remaining} days."
     payload="payload={\"text\":\"${message}\"}"
     curl -s -X POST --data-urlencode "$payload" "$SLACK_WEBHOOK_URL"
