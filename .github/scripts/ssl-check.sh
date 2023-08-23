@@ -14,5 +14,4 @@ for domain in "${DOMAINS[@]}"; do
     message="⚠ SSL Expiry Alert\n   * Domain : ${domain}\n   * Warning : The SSL certificate for ${domain} will expire in ${days_remaining} days."
     payload="payload={\"text\":\"${message}\"}"
     curl -s -X POST --data-urlencode "$payload" "$SLACK_WEBHOOK_URL"
-  fi
 done
